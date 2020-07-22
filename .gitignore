@@ -1,4 +1,4 @@
-.idea/
+.idea/*
 .vscode/
 **/.project
 **/.settings
