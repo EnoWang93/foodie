@@ -10,5 +10,4 @@ public class HelloController {
     public Object hello() {
        return "Hello World";
     }
-
 }
