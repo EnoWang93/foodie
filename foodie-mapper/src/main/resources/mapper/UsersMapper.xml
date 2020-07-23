@@ -1,12 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yinuo.mapper.UsersMapper">
-  <resultMap id="BaseResultMap" type="com.yinuo.pojo.Users">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yinuo.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.yinuo.pojo.Users" >
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="USER" jdbcType="CHAR" property="user" />
-    <result column="CURRENT_CONNECTIONS" jdbcType="BIGINT" property="currentConnections" />
-    <result column="TOTAL_CONNECTIONS" jdbcType="BIGINT" property="totalConnections" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+    <result column="lastName" property="lastName" jdbcType="VARCHAR" />
+    <result column="firstName" property="firstName" jdbcType="VARCHAR" />
+    <result column="avadar" property="avadar" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
 </mapper>

@@ -7,9 +7,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/foodie?useUnicode=true&characterEncoding=UTF-8&autoReconnect
+    url: jdbc:mysql://localhost:3306/foodie-shop?useUnicode=true&serverTimezone=UTC&characterEncoding=UTF-8&autoReconnect=TRUE
     username: root
-    password: root
+    password: 1234Asdfcn.
     hikari:
       connection-timeout: 30000 #ms
       minimum-idle: 5
