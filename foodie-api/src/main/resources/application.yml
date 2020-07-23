@@ -22,3 +22,8 @@ spring:
 mybatis:
   type-aliases-package: com.yinuo.pojo
   mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  mappers: com.yinuo.my.mapper.MyMapper
+  not-empty: false
+  identity: MYSQL
