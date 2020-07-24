@@ -1,6 +1,5 @@
 package com.yinuo.service.impl;
 
-import com.yinuo.mapper.CategoryMapper;
 import com.yinuo.mapper.CustomedCategoryMapper;
 import com.yinuo.pojo.Category;
 import com.yinuo.pojo.vo.CategoryVO;

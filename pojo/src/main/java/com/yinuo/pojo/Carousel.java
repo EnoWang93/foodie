@@ -42,7 +42,6 @@ public class Carousel {
         this.id = id;
     }
 
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -71,7 +70,6 @@ public class Carousel {
         return categoryId;
     }
 
-
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
@@ -99,7 +97,6 @@ public class Carousel {
     public void setIsVisible(Integer isVisible) {
         this.isVisible = isVisible;
     }
-
 
     public Date getCreateTime() {
         return createTime;

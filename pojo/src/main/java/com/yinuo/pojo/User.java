@@ -1,6 +1,7 @@
 package com.yinuo.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class User {
@@ -11,15 +12,23 @@ public class User {
 
     private String password;
 
-    private String nickName;
+    private String nickname;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "first_name")
     private String firstName;
+
     private String avadar;
 
     private String mobile;
+
+
     private String email;
 
     private Integer sex;
+
     private Date birthday;
 
     @Column(name = "created_time")
@@ -52,12 +61,12 @@ public class User {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getLastName() {
