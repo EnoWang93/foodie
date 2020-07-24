@@ -8,29 +8,56 @@ public class Carousel {
     @Id
     private String id;
 
+    /**
+     * image_url
+     */
     @Column(name = "image_url")
     private String imageUrl;
 
+    /**
+     * background_color
+     */
     @Column(name = "background_color")
     private String backgroundColor;
 
+    /**
+     * item_id
+     */
     @Column(name = "item_id")
     private String itemId;
 
+    /**
+     * category_id
+     */
     @Column(name = "category_id")
     private String categoryId;
 
+    /**
+     * type
+     */
     private Integer type;
 
+    /**
+     * order_num
+     */
     @Column(name = "order_num")
     private Integer orderNum;
 
+    /**
+     * is_visible
+     */
     @Column(name = "is_visible")
     private Integer isVisible;
 
+    /**
+     * create_time
+     */
     @Column(name = "create_time")
     private Date createTime;
 
+    /**
+     * update_time
+     */
     @Column(name = "update_time")
     private Date updateTime;
 
