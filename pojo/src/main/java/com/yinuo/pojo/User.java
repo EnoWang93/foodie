@@ -3,7 +3,7 @@ package com.yinuo.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
-public class Users {
+public class User {
     @Id
     private String id;
 

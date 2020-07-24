@@ -1,7 +1,7 @@
 package com.yinuo.controller;
 
 import com.yinuo.common.RestReturnJson;
-import com.yinuo.pojo.Users;
+import com.yinuo.pojo.User;
 import com.yinuo.pojo.bo.UserBO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class PassportController {
 
     @PostMapping("/signup")
     public RestReturnJson createUser(@RequestBody UserBO userBO) {
-        String username = userBO.getUserName();
+        String username = userBO.getUsername();
         String password = userBO.getPassword();
         String confirmPwd = userBO.getConfirmPassword();
 
@@ -56,7 +56,7 @@ public class PassportController {
         }
 
         // 4. sign up
-        Users userResult = userService.createUser(userBO);
+        User userResult = userService.createUser(userBO);
 
         return RestReturnJson.ok();
     }
