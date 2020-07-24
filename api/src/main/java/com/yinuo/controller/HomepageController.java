@@ -3,7 +3,9 @@ package com.yinuo.controller;
 import com.yinuo.common.RestReturnJson;
 import com.yinuo.common.enums.BINARY;
 import com.yinuo.pojo.Carousel;
+import com.yinuo.pojo.Category;
 import com.yinuo.service.CarouselService;
+import com.yinuo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,18 @@ public class HomepageController {
     @Autowired
     CarouselService carouselService;
 
+    @Autowired
+    CategoryService categoryService;
+
     @GetMapping("/carousels")
     public RestReturnJson getCarousels(){
         List<Carousel> list = carouselService.findAllCarousel(BINARY.YES.type);
+        return RestReturnJson.ok(list);
+    }
+
+    @GetMapping("/categories")
+    public RestReturnJson getRootCategories(){
+        List<Category> list = categoryService.findAllRootCategories();
         return RestReturnJson.ok(list);
     }
 }
