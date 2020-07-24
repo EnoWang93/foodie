@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        user.setNickName(userBO.getUsername());
+        user.setNickname(userBO.getUsername());
         user.setAvadar("");
         user.setBirthday(DateUtils.stringToDate("1900-01-01"));
         user.setSex(Sex.unknown.type);

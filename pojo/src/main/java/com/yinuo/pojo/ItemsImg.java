@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Table(name = "items_img")
 public class ItemsImg {
-
     @Id
     private String id;
 
