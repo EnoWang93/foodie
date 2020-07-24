@@ -1,5 +1,6 @@
 package com.yinuo.controller;
 
+import com.yinuo.common.MD5Utils;
 import com.yinuo.common.RestReturnJson;
 import com.yinuo.pojo.User;
 import com.yinuo.pojo.bo.UserBO;
@@ -7,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.yinuo.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("passport")
@@ -59,5 +63,26 @@ public class PassportController {
         User userResult = userService.createUser(userBO);
 
         return RestReturnJson.ok();
+    }
+
+    @PostMapping("/signin")
+    public RestReturnJson signin(@RequestBody UserBO userBO) throws Exception {
+
+        String username = userBO.getUsername();
+        String password = userBO.getPassword();
+
+        if (StringUtils.isBlank(username) ||
+                StringUtils.isBlank(password)) {
+            return RestReturnJson.errorMsg("username or password can't be empty");
+        }
+
+        User userResult = userService.findUserByUsernameAndPassword(username,
+                MD5Utils.getMD5Str(password));
+
+        if (userResult == null) {
+            return RestReturnJson.errorMsg("incorrect username or password");
+        }
+
+        return RestReturnJson.ok(userResult);
     }
 }
