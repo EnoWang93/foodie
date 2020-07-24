@@ -1,5 +1,7 @@
 package com.yinuo.controller;
 
+import com.yinuo.common.CookieUtils;
+import com.yinuo.common.JsonUtils;
 import com.yinuo.common.MD5Utils;
 import com.yinuo.common.RestReturnJson;
 import com.yinuo.pojo.User;
@@ -31,7 +33,9 @@ public class PassportController {
     }
 
     @PostMapping("/signup")
-    public RestReturnJson createUser(@RequestBody UserBO userBO) {
+    public RestReturnJson createUser(@RequestBody UserBO userBO,
+                                     HttpServletRequest request,
+                                     HttpServletResponse response) {
         String username = userBO.getUsername();
         String password = userBO.getPassword();
         String confirmPwd = userBO.getConfirmPassword();
@@ -62,11 +66,18 @@ public class PassportController {
         // 4. sign up
         User userResult = userService.createUser(userBO);
 
+        userResult = setNullProperty(userResult);
+
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(userResult), true);
+
         return RestReturnJson.ok();
     }
 
     @PostMapping("/signin")
-    public RestReturnJson signin(@RequestBody UserBO userBO) throws Exception {
+    public RestReturnJson signin(@RequestBody UserBO userBO,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception {
 
         String username = userBO.getUsername();
         String password = userBO.getPassword();
@@ -82,7 +93,19 @@ public class PassportController {
         if (userResult == null) {
             return RestReturnJson.errorMsg("incorrect username or password");
         }
+        CookieUtils.setCookie(request, response, "user",
+                JsonUtils.objectToJson(userResult), true);
 
         return RestReturnJson.ok(userResult);
+    }
+
+    private User setNullProperty(User userResult) {
+        userResult.setPassword(null);
+        userResult.setMobile(null);
+        userResult.setEmail(null);
+        userResult.setCreatedTime(null);
+        userResult.setUpdatedTime(null);
+        userResult.setBirthday(null);
+        return userResult;
     }
 }
