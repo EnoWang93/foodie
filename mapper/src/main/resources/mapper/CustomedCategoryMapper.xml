@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinuo.mapper.CustomedCategoryMapper" >
+
+  <resultMap id="CategoryVO" type="com.yinuo.pojo.vo.CategoryVO">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="level" property="level"/>
+    <result column="fatherId" property="fatherId"/>
+
+    <collection property="subCatList" ofType="com.yinuo.pojo.vo.SubCategoryVO">
+      <id column="subId" property="subId"/>
+      <result column="subName" property="subName"/>
+      <result column="subLevel" property="subLevel"/>
+      <result column="subFatherId" property="subFatherId"/>
+    </collection>
+  </resultMap>
+  <select id="getSubCategories" resultMap="CategoryVO" parameterType="int">
+      SELECT
+      f.id as id,
+      f.`name` as `name`,
+      f.level as level,
+      f.father_id as fatherId,
+      c.id as subId,
+      c.`name` as subName,
+      c.level as subLevel,
+      c.father_id as subFatherId
+      FROM
+      category f
+      LEFT JOIN
+      category c
+      on
+      f.id = c.father_id
+      WHERE
+      f.father_id = #{rootCatId}
+  </select>
+
+</mapper>
