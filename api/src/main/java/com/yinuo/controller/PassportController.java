@@ -74,8 +74,8 @@ public class PassportController {
         return RestReturnJson.ok();
     }
 
-    @PostMapping("/signin")
-    public RestReturnJson signin(@RequestBody UserBO userBO,
+    @PostMapping("/login")
+    public RestReturnJson login(@RequestBody UserBO userBO,
                                  HttpServletRequest request,
                                  HttpServletResponse response) throws Exception {
 
@@ -97,6 +97,16 @@ public class PassportController {
                 JsonUtils.objectToJson(userResult), true);
 
         return RestReturnJson.ok(userResult);
+    }
+
+    @PostMapping("/logout")
+    public RestReturnJson logout(@RequestParam String userId,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
+
+        CookieUtils.deleteCookie(request, response, "user");
+
+        return RestReturnJson.ok();
     }
 
     private User setNullProperty(User userResult) {
