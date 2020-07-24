@@ -1,11 +1,11 @@
 package com.yinuo.controller;
 
+import com.yinuo.common.RestReturnJson;
+import com.yinuo.pojo.Users;
+import com.yinuo.pojo.bo.UserBO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.yinuo.service.UserService;
 
 @RestController
@@ -24,5 +24,40 @@ public class PassportController {
             return 500;
         }
         return 200;
+    }
+
+    @PostMapping("/signup")
+    public RestReturnJson createUser(@RequestBody UserBO userBO) {
+        String username = userBO.getUserName();
+        String password = userBO.getPassword();
+        String confirmPwd = userBO.getConfirmPassword();
+
+        // 0. NOT NULL
+        if (StringUtils.isBlank(username) ||
+                StringUtils.isBlank(password) ||
+                StringUtils.isBlank(confirmPwd)) {
+            return RestReturnJson.errorMsg("username or password can't be empty");
+        }
+
+        // 1. user exists
+        boolean isExist = userService.doesUserExist(username);
+        if (isExist) {
+            return RestReturnJson.errorMsg("User already exists");
+        }
+
+        // 2. length of password
+        if (password.length() < 6) {
+            return RestReturnJson.errorMsg("length of password");
+        }
+
+        // 3. password same
+        if (!password.equals(confirmPwd)) {
+            return RestReturnJson.errorMsg("inconsistent password");
+        }
+
+        // 4. sign up
+        Users userResult = userService.createUser(userBO);
+
+        return RestReturnJson.ok();
     }
 }

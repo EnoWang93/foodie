@@ -1,6 +1,8 @@
 package com.yinuo.service.impl;
 
+import com.yinuo.common.DateUtils;
 import com.yinuo.common.MD5Utils;
+import com.yinuo.common.enums.Sex;
 import com.yinuo.mapper.UsersMapper;
 import com.yinuo.pojo.Users;
 import com.yinuo.pojo.bo.UserBO;
@@ -36,14 +38,27 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Users createUser(UserBO userBO) {
+
         Users user = new Users();
+        user.setId(DateUtils.generateId());
         user.setUsername(userBO.getUserName());
         try {
             user.setPassword(MD5Utils.getMD5Str(userBO.getPassword()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+
+        user.setNickName(userBO.getUserName());
+        user.setAvadar("");
+        user.setBirthday(DateUtils.stringToDate("1900-01-01"));
+        user.setSex(Sex.unknown.type);
+
+        user.setCreatedTime(new Date());
+        user.setUpdatedTime(new Date());
+
+        usersMapper.insert(user);
+
+        return user;
     }
 }
 
