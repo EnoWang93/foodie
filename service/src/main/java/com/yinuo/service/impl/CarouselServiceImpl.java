@@ -1,6 +1,5 @@
 package com.yinuo.service.impl;
 
-import com.yinuo.mapper.CarouselMapper;
 import com.yinuo.pojo.Carousel;
 import com.yinuo.service.CarouselService;
 import org.springframework.beans.factory.annotation.Autowired;
