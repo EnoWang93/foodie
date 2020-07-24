@@ -1,7 +1,9 @@
 package com.yinuo.service.impl;
 
+import com.yinuo.common.MD5Utils;
 import com.yinuo.mapper.UsersMapper;
 import com.yinuo.pojo.Users;
+import com.yinuo.pojo.bo.UserBO;
 import com.yinuo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,19 @@ public class UserServiceImpl implements UserService {
         Users result = usersMapper.selectOneByExample(userExample);
 
         return result != null;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public Users createUser(UserBO userBO) {
+        Users user = new Users();
+        user.setUsername(userBO.getUserName());
+        try {
+            user.setPassword(MD5Utils.getMD5Str(userBO.getPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 
