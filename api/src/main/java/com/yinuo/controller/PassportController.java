@@ -28,7 +28,7 @@ public class PassportController {
 
     @PostMapping("/signup")
     public RestReturnJson createUser(@RequestBody UserBO userBO) {
-        String username = userBO.getUserName();
+        String username = userBO.getUsername();
         String password = userBO.getPassword();
         String confirmPwd = userBO.getConfirmPassword();
 

@@ -41,14 +41,14 @@ public class UserServiceImpl implements UserService {
 
         Users user = new Users();
         user.setId(DateUtils.generateId());
-        user.setUsername(userBO.getUserName());
+        user.setUsername(userBO.getUsername());
         try {
             user.setPassword(MD5Utils.getMD5Str(userBO.getPassword()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        user.setNickName(userBO.getUserName());
+        user.setNickName(userBO.getUsername());
         user.setAvadar("");
         user.setBirthday(DateUtils.stringToDate("1900-01-01"));
         user.setSex(Sex.unknown.type);
