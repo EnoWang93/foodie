@@ -83,4 +83,31 @@ public class ItemController  extends BaseController{
 
         return RestReturnJson.ok(grid);
     }
+
+    @GetMapping("/search")
+    public RestReturnJson search(
+            @RequestParam String keywords,
+            @RequestParam String sort,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize) {
+
+        if (StringUtils.isBlank(keywords)) {
+            return RestReturnJson.errorMsg(null);
+        }
+
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = PAGE_SIZE;
+        }
+
+        PagedGridResult grid = itemService.searchItems(keywords,
+                sort,
+                page,
+                pageSize);
+
+        return RestReturnJson.ok(grid);
+    }
 }

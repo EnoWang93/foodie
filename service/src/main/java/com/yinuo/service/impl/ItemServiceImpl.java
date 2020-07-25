@@ -10,6 +10,7 @@ import com.yinuo.pojo.vo.CommentLevelCountsVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yinuo.pojo.vo.ItemCommentsVO;
+import com.yinuo.pojo.vo.SearchItemsVO;
 import com.yinuo.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -117,6 +118,19 @@ public class ItemServiceImpl implements ItemService {
         }
 
         return setterPagedGrid(list, currentPage);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public PagedGridResult searchItems(String keywords, String sort, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("keywords", keywords);
+        map.put("sort", sort);
+
+        PageHelper.startPage(page, pageSize);
+        List<SearchItemsVO> list = customedItemMapper.searchItems(map);
+
+        return setterPagedGrid(list, page);
     }
 
     private PagedGridResult setterPagedGrid(List<?> list, Integer page) {
