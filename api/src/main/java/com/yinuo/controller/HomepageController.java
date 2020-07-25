@@ -5,6 +5,7 @@ import com.yinuo.common.enums.BINARY;
 import com.yinuo.pojo.Carousel;
 import com.yinuo.pojo.Category;
 import com.yinuo.pojo.vo.CategoryVO;
+import com.yinuo.pojo.vo.NewItemsVO;
 import com.yinuo.service.CarouselService;
 import com.yinuo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,15 @@ public class HomepageController {
             return RestReturnJson.errorMsg("wrong category");
         }
         List<CategoryVO> list = categoryService.findAllSubCategories(rootCatId);
+        return RestReturnJson.ok(list);
+    }
+
+    @GetMapping("/newItems/{rootCatId}")
+    public RestReturnJson getNewItems(@PathVariable Integer rootCatId){
+        if (rootCatId == null) {
+            return RestReturnJson.errorMsg("wrong category");
+        }
+        List<NewItemsVO> list = categoryService.getNewItems(rootCatId);
         return RestReturnJson.ok(list);
     }
 }
