@@ -1,6 +1,7 @@
 package com.yinuo.service.impl;
 
 
+import com.yinuo.common.DesensitizationUtil;
 import com.yinuo.common.PagedGridResult;
 import com.yinuo.common.enums.CommentLevel;
 import com.yinuo.mapper.*;
@@ -111,9 +112,9 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(currentPage, pageSize);
 
         List<ItemCommentsVO> list = customedItemMapper.queryItemComments(map);
-//        for (ItemCommentsVO vo : list) {
-//            vo.setNickname(DesensitizationUtil.commonDisplay(vo.getNickname()));
-//        }
+        for (ItemCommentsVO vo : list) {
+            vo.setNickname(DesensitizationUtil.commonDisplay(vo.getNickname()));
+        }
 
         return setterPagedGrid(list, currentPage);
     }
