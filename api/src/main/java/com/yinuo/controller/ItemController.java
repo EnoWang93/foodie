@@ -8,6 +8,7 @@ import com.yinuo.pojo.ItemParam;
 import com.yinuo.pojo.ItemSpec;
 import com.yinuo.pojo.vo.CommentLevelCountsVO;
 import com.yinuo.pojo.vo.ItemInfoVO;
+import com.yinuo.pojo.vo.ShoppingCartVO;
 import com.yinuo.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,19 @@ public class ItemController  extends BaseController{
                 pageSize);
 
         return RestReturnJson.ok(grid);
+    }
+
+    @GetMapping("/refresh")
+    public RestReturnJson refresh(
+            @RequestParam String itemSpecIds) {
+
+        if (StringUtils.isBlank(itemSpecIds)) {
+            return RestReturnJson.ok();
+        }
+
+        List<ShoppingCartVO> list = itemService.queryItemsBySpecIds(itemSpecIds);
+
+        return RestReturnJson.ok(list);
     }
 
 }

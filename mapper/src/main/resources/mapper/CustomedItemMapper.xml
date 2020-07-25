@@ -92,4 +92,32 @@
       </otherwise>
     </choose>
   </select>
+
+  <select id="queryItemsBySpecIds" parameterType="List" resultType="com.yinuo.pojo.vo.ShoppingCartVO">
+    SELECT
+    t_item.id as itemId,
+    t_item.item_name as itemName,
+    t_item_img.url as itemImgUrl,
+    t_item_spec.id as specId,
+    t_item_spec.`name` as specName,
+    t_item_spec.price_discount as priceDiscount,
+    t_item_spec.original_price as originalPrice
+    FROM
+    item_spec t_item_spec
+    LEFT JOIN
+    item t_item
+    ON
+    t_item.id = t_item_spec.item_id
+    LEFT JOIN
+    item_img t_item_img
+    on
+    t_item_img.item_id = t_item.id
+    WHERE
+    t_item_img.is_main = 1
+    AND
+    t_item_spec.id IN
+    <foreach collection="paramsList" index="index" item="specId" open="(" separator="," close=")">
+      #{specId}
+    </foreach>
+  </select>
 </mapper>

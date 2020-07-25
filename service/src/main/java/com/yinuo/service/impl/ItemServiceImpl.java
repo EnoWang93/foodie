@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yinuo.pojo.vo.ItemCommentsVO;
 import com.yinuo.pojo.vo.SearchItemsVO;
+import com.yinuo.pojo.vo.ShoppingCartVO;
 import com.yinuo.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -154,5 +153,16 @@ public class ItemServiceImpl implements ItemService {
         grid.setTotal(pageList.getPages());
         grid.setRecords(pageList.getTotal());
         return grid;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<ShoppingCartVO> queryItemsBySpecIds(String specIds) {
+
+        String ids[] = specIds.split(",");
+        List<String> specIdsList = new ArrayList<>();
+        Collections.addAll(specIdsList, ids);
+
+        return customedItemMapper.queryItemsBySpecIds(specIdsList);
     }
 }

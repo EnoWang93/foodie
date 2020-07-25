@@ -3,6 +3,7 @@ package com.yinuo.service;
 import com.yinuo.common.PagedGridResult;
 import com.yinuo.pojo.*;
 import com.yinuo.pojo.vo.CommentLevelCountsVO;
+import com.yinuo.pojo.vo.ShoppingCartVO;
 
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface ItemService {
 
     public PagedGridResult searchItems(Integer catId, String sort,
                                       Integer page, Integer pageSize);
+
+    public List<ShoppingCartVO> queryItemsBySpecIds(String specIds);
 
 }
