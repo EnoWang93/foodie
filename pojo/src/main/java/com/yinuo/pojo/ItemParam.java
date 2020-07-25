@@ -5,8 +5,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "items_param")
-public class ItemsParam {
+@Table(name = "item_param")
+public class ItemParam {
     /**
      * id
      */

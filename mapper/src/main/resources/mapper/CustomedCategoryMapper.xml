@@ -62,8 +62,8 @@
             i.created_time as createdTime
         FROM
             category f
-        LEFT JOIN items i ON f.id = i.root_cat_id
-        LEFT JOIN items_img ii ON i.id = ii.item_id
+        LEFT JOIN item i ON f.id = i.root_cat_id
+        LEFT JOIN item_img ii ON i.id = ii.item_id
         WHERE
             f.level = 1
         AND

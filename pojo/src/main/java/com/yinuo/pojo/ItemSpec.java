@@ -6,8 +6,8 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Table(name = "items_spec")
-public class ItemsSpec {
+@Table(name = "item_spec")
+public class ItemSpec {
     /**
      * id
      */

@@ -5,8 +5,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "items_comments")
-public class ItemsComments {
+@Table(name = "item_comments")
+public class ItemComments {
 
     @Id
     private String id;

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yinuo.mapper.ItemsImgMapper">
-  <resultMap id="BaseResultMap" type="com.yinuo.pojo.ItemsImg">
+<mapper namespace="com.yinuo.mapper.ItemSpecMapper">
+  <resultMap id="BaseResultMap" type="com.yinuo.pojo.ItemSpec">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="item_id" jdbcType="VARCHAR" property="itemId" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
-    <result column="is_main" jdbcType="INTEGER" property="isMain" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="inventory" jdbcType="INTEGER" property="inventory" />
+    <result column="discounts" jdbcType="DECIMAL" property="discounts" />
+    <result column="price_discount" jdbcType="INTEGER" property="priceDiscount" />
+    <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
   </resultMap>
