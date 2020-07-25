@@ -29,3 +29,7 @@ mapper:
   mappers: com.yinuo.my.mapper.MyMapper
   not-empty: false
   identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true

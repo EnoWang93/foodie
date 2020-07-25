@@ -1,24 +1,23 @@
 package com.yinuo.controller;
 
+import com.yinuo.common.PagedGridResult;
 import com.yinuo.common.RestReturnJson;
 import com.yinuo.pojo.Item;
 import com.yinuo.pojo.ItemImg;
 import com.yinuo.pojo.ItemParam;
 import com.yinuo.pojo.ItemSpec;
+import com.yinuo.pojo.vo.CommentLevelCountsVO;
 import com.yinuo.pojo.vo.ItemInfoVO;
 import com.yinuo.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("items")
-public class ItemController {
+public class ItemController  extends BaseController{
 
     @Autowired
     private ItemService itemService;
@@ -43,5 +42,45 @@ public class ItemController {
         itemInfoVO.setItemParams(itemsParam);
 
         return RestReturnJson.ok(itemInfoVO);
+    }
+
+    @GetMapping("/commentLevel")
+    public RestReturnJson commentLevel(
+            @RequestParam String itemId) {
+
+        if (StringUtils.isBlank(itemId)) {
+            return RestReturnJson.errorMsg(null);
+        }
+
+        CommentLevelCountsVO countsVO = itemService.queryCommentCounts(itemId);
+
+        return RestReturnJson.ok(countsVO);
+    }
+
+    @GetMapping("/comments")
+    public RestReturnJson comments(
+            @RequestParam String itemId,
+            @RequestParam Integer level,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize) {
+
+        if (StringUtils.isBlank(itemId)) {
+            return RestReturnJson.errorMsg(null);
+        }
+
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = COMMON_PAGE_SIZE;
+        }
+
+        PagedGridResult grid = itemService.queryPagedComments(itemId,
+                level,
+                page,
+                pageSize);
+
+        return RestReturnJson.ok(grid);
     }
 }
