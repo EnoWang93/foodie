@@ -110,4 +110,32 @@ public class ItemController  extends BaseController{
 
         return RestReturnJson.ok(grid);
     }
+
+    @GetMapping("/catItems")
+    public RestReturnJson catItems(
+            @RequestParam Integer catId,
+            @RequestParam String sort,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize) {
+
+        if (catId == null) {
+            return RestReturnJson.errorMsg(null);
+        }
+
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = PAGE_SIZE;
+        }
+
+        PagedGridResult grid = itemService.searchItems(catId,
+                sort,
+                page,
+                pageSize);
+
+        return RestReturnJson.ok(grid);
+    }
+
 }

@@ -22,4 +22,7 @@ public interface ItemService {
     PagedGridResult searchItems(String keywords, String sort,
                                       Integer page, Integer pageSize);
 
+    public PagedGridResult searchItems(Integer catId, String sort,
+                                      Integer page, Integer pageSize);
+
 }
